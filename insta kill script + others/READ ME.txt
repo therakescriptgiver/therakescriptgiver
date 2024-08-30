@@ -1,0 +1,15 @@
+fyi, this script has inf range aslong are you are being targeted by rake, it will NOT work if rake isn't targeting you
+
+it has no gui, and nothing will pop up when you execute it. 
+
+it skips bloodhour, and will just kill him everytime
+
+you dont need power for this to work and like i said, it wont work if the rake isnt targeting you
+
+the other stuff thats in here is useful, and is cool stuff that you can play around with
+
+the other scripts are from the global scripts and their called 'unfairhub'
+
+when you load unfairhub i recommend using 'lynx+realzzhub' and if you want 'project rake'
+
+

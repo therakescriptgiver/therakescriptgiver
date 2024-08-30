@@ -1,0 +1,58 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local tool
+
+-- Function to kill NPCs
+local function killNPC(hit)
+    local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+    if humanoid and hit.Parent ~= character then
+        humanoid.Health = 0
+    end
+end
+
+-- Function to kill Rake continuously
+local function killRake()
+    while true do
+        local rake = workspace:FindFirstChild("Rake")
+        if rake then
+            local humanoid = rake:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid.Health = 0
+            end
+        end
+        wait(1) -- Check every second
+    end
+end
+
+-- Function to set up the tool
+local function setupTool(newTool)
+    tool = newTool
+    tool.Handle.Touched:Connect(killNPC)
+end
+
+-- Ensure the tool is set up correctly when character spawns
+local function onCharacterAdded(char)
+    character = char
+    local stunStick = character:WaitForChild("StunStick", 10)
+    if stunStick then
+        setupTool(stunStick)
+    end
+end
+
+-- Ensure the tool is always in the player's backpack
+player.Backpack.ChildAdded:Connect(function(child)
+    if child:IsA("Tool") and child.Name == "StunStick" then
+        setupTool(child)
+    end
+end)
+
+-- Initial setup
+if character then
+    onCharacterAdded(character)
+else
+    player.CharacterAdded:Connect(onCharacterAdded)
+end
+
+-- Start killing Rake
+killRake()
